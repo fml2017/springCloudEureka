@@ -1,0 +1,19 @@
+server:
+  port: 7001
+spring:
+  application:
+    name: goods
+    profiles:
+      active: goods1
+  cloud:
+    config:
+      uri: http://localhost:8888
+  config:
+    import: configserver:http://localhost:8888?fail-fast=true&max-attempts=10&max-interval=1500&multiplier=1.2&initial-interval=1100
+loadbalancer:
+  client:
+    name: goods
+eureka:
+  client:
+    service-url:
+      defaultZone: http://server1:6001/eureka/
